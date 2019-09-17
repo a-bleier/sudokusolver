@@ -4,7 +4,7 @@ type cell struct {
 	possibleValues []int
 }
 
-func (c cell) hasValue(value int) bool {
+func (c *cell) hasValue(value int) bool {
 	for _, cellVal := range c.possibleValues {
 		if(cellVal == value){
 			return true
@@ -13,7 +13,11 @@ func (c cell) hasValue(value int) bool {
 	return false
 }
 
-func (c cell) removeValue (value int){
+func (c *cell) getValueAt(pos int) int {
+	return c.possibleValues[pos]
+}
+
+func (c *cell) removeValue (value int){
 	var newpossibleValues []int
 	for _, cellVal := range c.possibleValues {
 		if(cellVal != value){
@@ -23,6 +27,10 @@ func (c cell) removeValue (value int){
 	c.possibleValues = newpossibleValues
 }
 
-func (c cell) getPossibleValues () []int {
+func (c *cell) getNumberOfPossibleValues() int {
+	return len(c.possibleValues)
+}
+
+func (c *cell) getPossibleValues () []int {
 	return c.possibleValues
 }

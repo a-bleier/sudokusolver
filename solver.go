@@ -1,5 +1,6 @@
 package sudokusolver
 //The sudoku will be solved here
+//Will only support sudokus with the size 4, 6 and 9
 
 import (
 	"fmt"
@@ -28,13 +29,23 @@ func RunSolver (loader Loader) int {
 
 func solve (sudoku sudokuType) sudokuType{
 
-	//rule a
+	for(!sudoku.isSolvedSuccessfully()){
+		
+		sudoku.subsetElimination()
+		sudoku.printSudoku()
 
-	//rule b
+		
 
-	//rule c
+		//Guessing
+		
+	}
 
-	//guessing. The object has to copied for recursive calls. Can get really time consuming from here
+	
+	sudoku.subsetElimination()
+	sudoku.printSudoku()
+	//fmt.Println("isSolved")
+
+	
 	return sudoku
 }
 
@@ -73,7 +84,7 @@ func newSudoku (sudokuField [][]int, size int) sudokuType {
 
 func sudokuFieldValidityCheck (sudokuField [][]int, size int) bool {
 	//Number of rows
-	if(len(sudokuField) != size){
+	if(len(sudokuField) != size && size != 9){
 		return false
 	}
 	for  row := 0; row < len(sudokuField); row++{
